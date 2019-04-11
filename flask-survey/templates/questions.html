@@ -3,18 +3,28 @@
 {% block h1 %}{{question.question}}{% endblock %}
         
 {% block content %}
+<form method="POST" action="/questions">
     {% for choice in question.choices %}
-        <a class="btn btn-primary" href='/questions/{{question_number}}'>{{choice}}</a>
+
+        <input type="submit"  name="{{question_number}}" value="{{choice}}">
+
+        
+        {# <a class="btn btn-primary" href='/questions/{{question_number}}'>{{choice}}</a> #}
     {% endfor %}
+        {% if question.allow_text %}
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+        {% endif %}
+
+
+        
+    </form>
 {% endblock content%}
 
 {% block button %}
-{% if question.allow_text %}
-    <div class="form-group">
-        <label for="comment">Comment:</label>
-        <textarea class="form-control" rows="5" id="comment"></textarea>
-    </div>
-{% endif %}
+
 {% endblock button%}
 
     
